@@ -10,25 +10,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  name: any= 'Israa';
-    state: string = '';
+  name: any = 'Israa';
+  state: string = '';
 
-    constructor(public af: AngularFireAuth,private router: Router) {
+  constructor(public af: AngularFireAuth, private router: Router) {
 
-      this.af.auth.onAuthStateChanged(auth => {
-        if(auth) {
-          console.log('auth',auth)
-          this.name = auth;
-        }
-      });
+    this.af.auth.onAuthStateChanged(auth => {
+      if (auth) {
+        console.log('auth', auth)
+        this.name = auth;
+      }
+    });
 
-    }
+  }
 
-    logout() {
-       this.af.auth.signOut();
-       console.log('logged out');
-       this.router.navigateByUrl('/login-email');
-    }
+  logout() {
+    this.af.auth.signOut();
+    console.log('logged out');
+    this.router.navigateByUrl('/login');
+  }
   ngOnInit() {
   }
 

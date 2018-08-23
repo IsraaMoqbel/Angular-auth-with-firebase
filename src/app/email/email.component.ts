@@ -10,32 +10,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./email.component.css']
 })
 export class EmailComponent implements OnInit {
-     error: any;
+  error: any;
 
-     constructor(public af: AngularFireAuth,private router: Router) {
-     // this.af.auth.onAuthStateChanged(auth => {
-     //   if(auth) {
-     //     this.router.navigateByUrl('/members');
-     //   }
-     // });
-   }
+  constructor(public af: AngularFireAuth, private router: Router) {
+    // this.af.auth.onAuthStateChanged(auth => {
+    //   if(auth) {
+    //     this.router.navigateByUrl('/members');
+    //   }
+    // });
+  }
 
-   onSubmit(formData) {
-     if(formData.valid) {
-       console.log(formData.value);
-       this.af.auth.signInWithEmailAndPassword(formData.value.email,
+  onSubmit(formData) {
+    if (formData.valid) {
+      console.log(formData.value);
+      this.af.auth.signInWithEmailAndPassword(formData.value.email,
         formData.value.password)
         .then(
-         (success) => {
-         console.log(success);
-         this.router.navigate(['/members']);
-       }).catch(
-         (err) => {
-         console.log(err);
-         this.error = err;
-       })
-     }
-   }
+          (success) => {
+            console.log(success);
+            this.router.navigate(['/members']);
+          }).catch(
+            (err) => {
+              console.log(err);
+              this.error = err;
+            })
+    }
+  }
   ngOnInit() {
   }
 

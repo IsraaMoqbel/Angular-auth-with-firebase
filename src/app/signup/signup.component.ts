@@ -13,42 +13,37 @@ export class SignupComponent implements OnInit {
   state: string = '';
   error: any;
 
-  constructor(public af: AngularFireAuth, private router: Router) {
-
-  }
+  constructor(public af: AngularFireAuth, private router: Router) {}
 
   onSubmit(formData) {
     if (formData.valid) {
       console.log(formData.value);
       this.af.auth.createUserWithEmailAndPassword(
         formData.value.email,
-        formData.value.password,
-
+        formData.value.password
       )
-        .then(
-          (success) => {
-            console.log('success',success);
-            this.router.navigate(['/login-email'])
-          }).catch(
-            (err) => {
-              console.log(err);
-              this.error = err;
-            })
-    }
-
-          this.af.auth.onAuthStateChanged(auth => {
-            if(auth) {
-          auth.updateProfile({
-             displayName:formData.value.displayName, // some displayName,
-             photoURL: 'xxxxxx'// some photo url
+      .then(
+        (success) => {
+          console.log('success', success);
+          this.router.navigate(['/login'])
+        }).catch(
+          (err) => {
+            console.log(err);
+            this.error = err;
           })
-            }
-          });
-
-
+    }
+    //adding name and photoUrl to firebase
+    this.af.auth.onAuthStateChanged(auth => {
+      if (auth) {
+        auth.updateProfile({
+          displayName: formData.value.displayName, // some displayName,
+          photoURL: 'xxxxxx'// some photo url
+        })
+      }
+    });
   }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
 }
