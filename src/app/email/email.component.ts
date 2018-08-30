@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { Router } from '@angular/router';
+import { AuthService } from './../auth.service';
 
 
 @Component({
@@ -11,32 +12,34 @@ import { Router } from '@angular/router';
 })
 export class EmailComponent implements OnInit {
   error: any;
+  constructor(public af: AngularFireAuth, private router: Router, public authService: AuthService) {
+    console.log('Email activate', this.af.auth.currentUser)
+    this.af.auth.onAuthStateChanged(auth => {
+      if (!auth) {
+        console.log('not authorized')
+        // this.name = auth;
+      } else {
+        console.log('auth in members', auth)
+        // this.router.navigate(['/members']);
 
-  constructor(public af: AngularFireAuth, private router: Router) {
-    // this.af.auth.onAuthStateChanged(auth => {
-    //   if(auth) {
-    //     this.router.navigateByUrl('/members');
-    //   }
-    // });
+      }
+    });
+
   }
 
   onSubmit(formData) {
     if (formData.valid) {
       console.log(formData.value);
-      this.af.auth.signInWithEmailAndPassword(formData.value.email,
-        formData.value.password)
-        .then(
-          (success) => {
-            console.log(success);
-            this.router.navigate(['/members']);
-          }).catch(
-            (err) => {
-              console.log(err);
-              this.error = err;
-            })
+      this.authService.loginWithEmail(formData.value.email, formData.value.password).then((data) => {
+        this.router.navigate(['/members']);
+      })
+        .catch(
+          (err) => {
+            console.log(err);
+            this.error = err;
+          })
     }
   }
   ngOnInit() {
   }
-
 }

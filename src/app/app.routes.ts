@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { MembersComponent } from './members/members.component';
-import { AuthGuard } from './auth.service';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 import { SignupComponent } from './signup/signup.component';
 import { EmailComponent } from './email/email.component';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,8 @@ export const router: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'signup', component: SignupComponent },
     { path: 'login', component: EmailComponent },
-    { path: 'members', component: MembersComponent, canActivate: [AuthGuard]
+    { path: 'members', component: MembersComponent
+    , canActivate: [AuthGuard]
   }
 
 ]

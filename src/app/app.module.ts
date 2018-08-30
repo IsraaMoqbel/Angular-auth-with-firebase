@@ -14,7 +14,7 @@ import { MembersComponent } from './members/members.component';
 import { RouterModule } from '@angular/router';
 import { routingComponents } from './app.routes';
 import { RoutesModule } from './app.routes';
-import { AuthGuard } from './auth.service';
+import { AuthService } from './auth.service';
 import { routes } from './app.routes';
 
 export const firebaseConfig = {
@@ -40,7 +40,7 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
