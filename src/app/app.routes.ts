@@ -10,13 +10,13 @@ import { EmailComponent } from './email/email.component';
 import { NgModule } from '@angular/core';
 
 export const router: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'signup', component: SignupComponent },
-    { path: 'login', component: EmailComponent },
-    { path: 'members', component: MembersComponent
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: EmailComponent },
+  {
+    path: 'members', component: MembersComponent
     , canActivate: [AuthGuard]
   }
-
 ]
 
 @NgModule({
@@ -30,4 +30,4 @@ export const router: Routes = [
 
 export class RoutesModule { }
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
-export const routingComponents = [SignupComponent, EmailComponent, MembersComponent ]
+export const routingComponents = [SignupComponent, EmailComponent, MembersComponent]

@@ -7,6 +7,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 // for database
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+//firebase modules
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
@@ -38,7 +41,10 @@ export const firebaseConfig = {
     RoutesModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+   AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+   AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

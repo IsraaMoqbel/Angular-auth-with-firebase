@@ -9,25 +9,24 @@ import 'rxjs/add/operator/take';
 @Injectable()
 export class AuthService {
 
-    constructor(private af: AngularFireAuth, private router: Router) {
-      this.af.auth.onAuthStateChanged(auth => {
-        if (!auth) {
-          console.log('not authorized')
-          // this.name = auth;
-        } else {
-          console.log('auth in service', auth)
-          this.router.navigate(['/members']);
+  constructor(private af: AngularFireAuth, private router: Router) {
+    this.af.auth.onAuthStateChanged(auth => {
+      if (!auth) {
+        console.log('not authorized')
+      } else {
+        console.log('auth in service', auth)
+        this.router.navigate(['/members']);
 
-        }
-      });
-    }
+      }
+    });
+  }
 
-    loginWithEmail(email,password) {
-      return this.af.auth.signInWithEmailAndPassword(email,password);
-    }
-    logout() {
-      return this.af.auth.signOut()
-    }
+  loginWithEmail(email, password) {
+    return this.af.auth.signInWithEmailAndPassword(email, password);
+  }
+  logout() {
+    return this.af.auth.signOut()
+  }
 
 
 }

@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './auth.service';
+import { AppService } from './app.service';
 import { Router } from '@angular/router';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+import { config } from './app.config';
+import 'rxjs/add/operator/map';
+import { Msg } from './app.model';
 
 @Component({
   selector: 'app-root',
@@ -9,28 +15,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Authintication';
-    private isLoggedIn: Boolean;
-    private user_displayName: String;
-    private user_email: String;
-    constructor(public authService: AuthService, private router: Router, public af: AngularFireAuth) {
-      // this.authService.af.auth.subscribe(
-      //   (auth) => {
-      //     if (auth == null) {
-      //       console.log("Logged out");
-      //       this.isLoggedIn = false;
-      //       // this.user_displayName = '';
-      //       // this.user_email = '';
-      //       this.router.navigate(['login']);
-      //     } else {
-      //       this.isLoggedIn = true;
-      //       // this.user_displayName = auth.google.displayName;
-      //       // this.user_email = auth.google.email;
-      //       console.log("Logged in");
-      //       console.log(auth);
-      //       this.router.navigate(['members']);
-      //     }
-      //   }
-      // );
-    }
+  title = 'Authentication';
+
+  constructor(public authService: AuthService, private router: Router, public af: AngularFireAuth, private db: AngularFirestore, private appService: AppService) { }
+
 }

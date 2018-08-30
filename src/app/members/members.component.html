@@ -4,8 +4,51 @@
     </header>
     <div id="page" >
       <h2>Hey {{ name.displayName }}!</h2>
-
       <img src="" alter="somePic"/>
     </div>
 
 </div>
+
+<section>
+<div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm">
+      <div class="form-group">
+        <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control" placeholder="Enter Msg" required>
+      </div>
+
+      <p *ngIf="loading">
+        <i class="fa fa-spinner fa-spin"></i>
+      </p>
+
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!f.valid" (click)="saveMsg()">
+          Send
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <table class="table table-hover">
+      <tr>
+        <!-- <th>#</th> -->
+        <th>Msg</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let msg of msgs | async; let i = index" [attr.data-index]="i">
+        <!-- <td>{{i + 1}}</td> -->
+        <td>{{msg.msg}} from <strong>{{msg.username}}</strong></td>
+        <td>
+          <button class="btn btn-success" (click)="edit(msg)">
+                     <i class="fa fa-edit"></i>
+                   </button>
+
+          <button class="btn btn-danger" (click)="deleteMsg(msg.id)">
+          <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</section>
