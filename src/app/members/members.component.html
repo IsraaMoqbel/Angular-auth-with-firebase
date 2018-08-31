@@ -3,7 +3,6 @@
 <div class="form-container" id="toolbar">
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -17,21 +16,15 @@
     <button (click)="logout()" class="basic-btn btn btn-primary">Logout</button>
   </div>
 </nav>
-  <header>
-  </header>
 
 </div>
 
 <section>
   <div class="column">
     <div class="col-md-6">
-
     </div>
     <div class="msgsAndUsers">
-
-
       <div class="usersDiv">
-
         <h4 class="usersTitle">Users</h4>
         <ul  *ngFor="let user of users|async; let i = index" [attr.data-index]="i">
           <li>{{user.username}}</li>
@@ -40,12 +33,10 @@
       <div>
         <table class="table table-hover">
           <tr>
-            <!-- <th>#</th> -->
             <th>Msgs</th>
             <th></th>
           </tr>
           <tr *ngFor="let msg of msgs|async; let i = index" [attr.data-index]="i">
-            <!-- <td>{{i + 1}}</td> -->
 
             <td>
               <div class="message-sender contain" ><a href="#"><strong>{{msg.username}}</strong></a></div>

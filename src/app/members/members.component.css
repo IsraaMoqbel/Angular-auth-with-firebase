@@ -108,10 +108,7 @@ li {
 .bg-light {
     background-color: #d2e5e9!important;
 }
-/* .form-control {
-  width: 70%;
-  margin: auto;
-} */
+
 .frm {
   display: flex;
   flex-flow: row;
