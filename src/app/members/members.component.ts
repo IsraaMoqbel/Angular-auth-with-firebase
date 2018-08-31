@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnChanges,DoCheck } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { Router } from '@angular/router';
@@ -9,7 +9,11 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { config } from '../app.config';
 import 'rxjs/add/operator/map';
-import { Msg } from '../app.model';
+import { Msg,User } from '../app.model';
+import 'rxjs/add/operator/do';
+
+import 'rxjs/add/operator/take';
+
 
 @Component({
   selector: 'app-members',
@@ -19,7 +23,11 @@ import { Msg } from '../app.model';
 export class MembersComponent implements OnInit {
   name: any = 'Israa';
   msgs: Observable<any[]>;
+  users: Observable<any[]>;
   id: any;
+  myMsg: string;
+  editMode: boolean = false;
+  msgToEdit: any = {};
  constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router,  private db: AngularFirestore, private appService: AppService) {
    this.af.auth.onAuthStateChanged(auth => {
    if (auth) {
@@ -42,26 +50,43 @@ export class MembersComponent implements OnInit {
         // An error happened.
       });
     }
-    myMsg: string;
-    editMode: boolean = false;
-    msgToEdit: any = {};
     ngOnInit() {
       // this.msgs = this.db.collection(config.collection_endpoint).valueChanges();
+
       this.msgs = this.db
-        .collection(config.collection_endpoint)
+        .collection(config.collection_endpoint, ref => ref.orderBy('date'))
         .snapshotChanges()
         .map(actions => {
           return actions.map(a => {
             //Get document data
             const data = a.payload.doc.data() as Msg;
             //Get document id
-            console.log('data',data)
             const id = a.payload.doc.id;
-            //Use spread operator to add the id to the document data
+
+            if(this.name.displayName === data.username){
+            data.show=false;
+          }else {
+            data.show=true;
+          }
+          //Use spread operator to add the id to the document data
             return { id, ...data };
-          });
+          })
+        });
+      this.users = this.db
+        .collection(config.users_endpoint)
+        .snapshotChanges()
+        .map(actions => {
+          return actions.map(a => {
+            //Get document data
+            const data = a.payload.doc.data() as User;
+            //Get document id
+            const id = a.payload.doc.id;
+          //Use spread operator to add the id to the document data
+            return { id, ...data };
+          })
         });
     }
+
     edit(msg) {
       console.log(msg);
       //Set taskToEdit and editMode
@@ -81,7 +106,7 @@ export class MembersComponent implements OnInit {
              username:this.name.displayName
           };
           if (!this.editMode) {
-             console.log(msg);
+             console.log('sent msg',msg);
              this.appService.addMsg(msg);
           } else {
              //Get the task id

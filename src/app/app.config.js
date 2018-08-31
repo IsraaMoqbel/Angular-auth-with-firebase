@@ -1,3 +1,4 @@
 export const config = {
-   collection_endpoint: 'msgs'
+   collection_endpoint: 'msgs',
+   users_endpoint:'users'
 };

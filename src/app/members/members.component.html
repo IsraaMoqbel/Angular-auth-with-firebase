@@ -1,54 +1,93 @@
+
+
 <div class="form-container" id="toolbar">
-    <header >
-      <button (click)="logout()" class="basic-btn">Logout</button>
-    </header>
-    <div id="page" >
-      <h2>Hey {{ name.displayName }}!</h2>
-      <img src="" alter="somePic"/>
-    </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/members">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> {{ name.displayName }}!</a>
+      </li>
+    </ul>
+
+    <button (click)="logout()" class="basic-btn btn btn-primary">Logout</button>
+  </div>
+</nav>
+  <header>
+  </header>
 
 </div>
 
 <section>
-<div class="row">
-  <div class="col-md-6">
-    <form #f="ngForm">
-      <div class="form-group">
-        <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control" placeholder="Enter Msg" required>
+  <div class="column">
+    <div class="col-md-6">
+
+    </div>
+    <div class="msgsAndUsers">
+
+
+      <div class="usersDiv">
+
+        <h4 class="usersTitle">Users</h4>
+        <ul  *ngFor="let user of users|async; let i = index" [attr.data-index]="i">
+          <li>{{user.username}}</li>
+        </ul>
       </div>
+      <div>
+        <table class="table table-hover">
+          <tr>
+            <!-- <th>#</th> -->
+            <th>Msgs</th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let msg of msgs|async; let i = index" [attr.data-index]="i">
+            <!-- <td>{{i + 1}}</td> -->
 
-      <p *ngIf="loading">
-        <i class="fa fa-spinner fa-spin"></i>
-      </p>
+            <td>
+              <div class="message-sender contain" ><a href="#"><strong>{{msg.username}}</strong></a></div>
 
+              <div class="message-box message-partner ">
+
+                <div class="msg">
+                  {{msg.msg}}
+                </div>
+                  <div class="buttons">
+                    <div class="inner">
+
+                    <button [hidden]='msg.show' class="btn btn-success buttonClass" (click)="edit(msg)">
+                       <i class="fa fa-edit"></i>
+                          </button>
+
+                    <button [hidden]='msg.show' class="btn btn-danger buttonClass" (click)="deleteMsg(msg.id)">
+                        <i class="fas fa-trash"></i>
+                          </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </td>
+            <td>
+
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <form #f="ngForm" class="frm">
+      <div class="form-group ">
+        <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control inpt" placeholder="Enter Msg" required>
+      </div>
       <div class="form-group">
         <button class="btn btn-primary" [disabled]="!f.valid" (click)="saveMsg()">
-          Send
-        </button>
+        Send
+      </button>
       </div>
     </form>
   </div>
-  <div class="col-md-6">
-    <table class="table table-hover">
-      <tr>
-        <!-- <th>#</th> -->
-        <th>Msg</th>
-        <th></th>
-      </tr>
-      <tr *ngFor="let msg of msgs | async; let i = index" [attr.data-index]="i">
-        <!-- <td>{{i + 1}}</td> -->
-        <td>{{msg.msg}} from <strong>{{msg.username}}</strong></td>
-        <td>
-          <button class="btn btn-success" (click)="edit(msg)">
-                     <i class="fa fa-edit"></i>
-                   </button>
-
-          <button class="btn btn-danger" (click)="deleteMsg(msg.id)">
-          <i class="fas fa-trash"></i>
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
 </section>

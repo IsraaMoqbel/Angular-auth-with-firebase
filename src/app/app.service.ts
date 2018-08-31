@@ -1,5 +1,5 @@
 import { config } from './app.config';
-import { Msg } from './app.model';
+import { Msg, User } from './app.model';
 import { Injectable } from '@angular/core';
 import {
   AngularFirestoreDocument,
@@ -12,16 +12,22 @@ import {
 })
 export class AppService {
   msgs: AngularFirestoreCollection<Msg>;
+  users: AngularFirestoreCollection<User>;
   private taskDoc: AngularFirestoreDocument<Msg>;
   constructor(private db: AngularFirestore) {
     //Get the tasks collection
     this.msgs = db.collection<Msg>(config.collection_endpoint);
+    this.users = db.collection<User>(config.users_endpoint);
   }
 
   addMsg(msg) {
   //Add the new task to the collection
   this.msgs.add(msg);
 } //addTask
+
+addUser(user){
+  this.users.add(user);
+}
 
 updateMsg(id, update) {
    //Get the task document

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
-
+import {AppService} from '../app.service'
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
   state: string = '';
   error: any;
 
-  constructor(public af: AngularFireAuth, private router: Router) {}
+  constructor(public af: AngularFireAuth, private router: Router,private appService: AppService) {}
 
   onSubmit(formData) {
     if (formData.valid) {
@@ -25,6 +25,8 @@ export class SignupComponent implements OnInit {
       .then(
         (success) => {
           console.log('success', success);
+            this.appService.addUser({username: formData.value.displayName})
+
           this.router.navigate(['/login'])
         }).catch(
           (err) => {
