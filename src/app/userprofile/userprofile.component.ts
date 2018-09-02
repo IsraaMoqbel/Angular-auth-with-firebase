@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from './../app.service';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -11,7 +12,8 @@ import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask 
 export class UserprofileComponent implements OnInit {
 username:string;
 photoURL:string;
-  constructor(private router: Router,private route:ActivatedRoute,  public appService: AppService) {
+
+  constructor(private router: Router,private route:ActivatedRoute,  public appService: AppService, public authService: AuthService) {
 
    }
 
@@ -34,5 +36,15 @@ photoURL:string;
       })
     })
 
+  }
+
+  logout() {
+    const x = this
+    this.authService.logout().then(function() {
+      console.log('logged out');
+      x.router.navigateByUrl('/login');
+    }).catch(function(error) {
+      // An error happened.
+    });
   }
 }

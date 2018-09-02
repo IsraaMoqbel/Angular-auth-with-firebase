@@ -12,6 +12,8 @@ import { AuthService } from './../auth.service';
 })
 export class EmailComponent implements OnInit {
   error: any;
+  email:string;
+  password:string;
   constructor(public af: AngularFireAuth, private router: Router, public authService: AuthService) {
     console.log('Email activate', this.af.auth.currentUser)
     this.af.auth.onAuthStateChanged(auth => {

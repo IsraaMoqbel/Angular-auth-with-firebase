@@ -20,6 +20,9 @@ export class SignupComponent implements OnInit {
   uploadState: Observable<string>;
   uploadProgress: Observable<number>;
   downloadSrc:string;
+  email:string;
+  password:string;
+  displayName:string;
   constructor(public af: AngularFireAuth, private router: Router,private appService: AppService, private afStorage: AngularFireStorage) {}
 
   onSubmit(formData) {
