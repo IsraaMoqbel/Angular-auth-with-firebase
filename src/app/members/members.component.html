@@ -7,7 +7,7 @@
           <a class="nav-link" href="/members">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"> {{ name.displayName }}!</a>
+          <a class="nav-link" routerLink="/user/{{name.displayName}}"> {{ name.displayName }}!</a>
         </li>
       </ul>
 
@@ -77,7 +77,21 @@
       <div class="form-group ">
         <p class="lead emoji-picker-container">
           <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control inpt" placeholder="Enter Msg" data-emojiable="true"></p>
+        </div>
+          <div class="form-group">
+            <div class="card-body clip">
+              <div class="upload-btn-wrapper">
+                <button class="btn btn1"><i class="fas fa-paperclip"></i></button>
+                <input type="file" (change)="upload($event)" accept=".png,.jpg" name="myfile" required/>
+              </div>
 
+            </div>
+          </div>
+          <button class="btn btn-primary send" [disabled]="!f.valid" (click)="saveMsg()">
+            Send
+          </button>
+
+        </form>
 
         <!-- progress bar -->
         <div class="progress width">
@@ -85,18 +99,4 @@
         </div>
 
       </div>
-      <div class="form-group">
-        <div class="card-body clip">
-          <div class="upload-btn-wrapper">
-            <button class="btn btn1"><i class="fas fa-paperclip"></i></button>
-            <input type="file" (change)="upload($event)" accept=".png,.jpg" name="myfile" required/>
-          </div>
-
-        </div>
-        <button class="btn btn-primary" [disabled]="!f.valid" (click)="saveMsg()">
-        Send
-      </button>
-      </div>
-    </form>
-  </div>
 </section>

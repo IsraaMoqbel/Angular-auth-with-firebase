@@ -32,7 +32,7 @@
   background: rgba(100, 170, 0, 0.1);
   border: 2px solid rgba(100, 170, 0, 0.1);
   color: #6c6c6c;
-  font-size: 12px;
+  font-size: 18px;
   display: flex;
 justify-content: space-between;
 }
@@ -55,6 +55,7 @@ justify-content: space-between;
 flex-flow: column;
 justify-content: flex-start;
 align-items: flex-start;
+-webkit-max-logical-width: max-content;
 }
 
 .message-partner:after {
@@ -100,6 +101,7 @@ ul {
   margin-right: 20px;
   position: fixed;
   height: 100%;
+  margin-top: 55px;
 }
 
 li {
@@ -119,9 +121,16 @@ margin: auto;
 }
 
 .frm {
+  margin: auto;
+  width: 68%;
   display: flex;
   flex-flow: row;
-  justify-content: space-evenly;
+  position: fixed;
+  left: 1005px;
+  bottom: 206px;
+  width: 100%;
+  color: white;
+  text-align: center;
 }
 .inpt {
       /* width: 225%; */
@@ -135,11 +144,11 @@ margin: auto;
   cursor: pointer;
 }
 .msgs {
-  width: 70%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    flex-flow: column;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  margin-left: 155px
 }
 
 
@@ -176,8 +185,17 @@ margin: auto;
   width: 20px;
   margin: auto;
 }
-.crop {
-  /* width:100px;
-  height:100px; */
+.width {
+  margin: auto;
+  width: 50%;
+  background-color: white
+}
+.send{
+  height: 35px;
+  margin-left: 30px
+}
 
+.navbar {
+  position: fixed;
+  width: 100%;
 }

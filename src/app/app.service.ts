@@ -12,7 +12,7 @@ import {
 })
 export class AppService {
   msgs: AngularFirestoreCollection<Msg>;
-  users: AngularFirestoreCollection<User>;
+  users: any;
   private taskDoc: AngularFirestoreDocument<Msg>;
   constructor(private db: AngularFirestore) {
     //Get the msgs and users collection
@@ -42,5 +42,22 @@ deleteMsg(id) {
    this.taskDoc.delete();
 } //deleteMsg
 
+getUser(username:string){
+  console.log('i\'m in')
+  this.users = this.db
+    .collection(config.users_endpoint)
+    .snapshotChanges()
+    .map(actions => {
+      return actions.map(a => {
+        //Get document data
+        const data = a.payload.doc.data() as User;
+        //Get document id
+        const id = a.payload.doc.id;
+        //Use spread operator to add the id to the document data
+        return { id, ...data };
+      })
+    });
+    return this.users
+}
 
 }

@@ -1,0 +1,18 @@
+.bg-light {
+    background-color: #d2e5e9!important;
+}
+
+.profileImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+}
+.userInfo{
+  margin-top: 90px;
+}

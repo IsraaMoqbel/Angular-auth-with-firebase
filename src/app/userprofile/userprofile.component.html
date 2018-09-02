@@ -1,1 +1,21 @@
-<h1>Welcome {{username}}</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/members">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user/{{username}}"> {{ username }}!</a>
+      </li>
+    </ul>
+
+    <button (click)="logout()" class="basic-btn btn btn-primary">Logout</button>
+  </div>
+</nav>
+
+<div>
+
+<img class="profileImage userInfo" [src]="photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'"  routerLink="/user/{{username}}"/>
+
+<h1  class="">Welcome {{username}}</h1>
+</div>

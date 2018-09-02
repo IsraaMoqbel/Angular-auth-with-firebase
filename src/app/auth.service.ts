@@ -8,7 +8,6 @@ import 'rxjs/add/operator/take';
 
 @Injectable()
 export class AuthService {
-
   constructor(private af: AngularFireAuth, private router: Router) {
     this.af.auth.onAuthStateChanged(auth => {
       if (!auth) {
@@ -26,6 +25,7 @@ export class AuthService {
   logout() {
     return this.af.auth.signOut()
   }
+
 
 
 }

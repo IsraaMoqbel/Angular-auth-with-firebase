@@ -1,30 +1,16 @@
-<div class="form-container">
-
-  <div class="">
-
-    <a routerLink="/login" id="goback">Go back</a>
-    <h2>Custom Login</h2>
-
-    <span class="error" *ngIf="error" >{{ error }}</span>
-  </div>
-  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
-<div class="">
-
-
-
-      <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
+<form class="cp-login-form" id="cp-login-form" #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+  <h2 class="cp-login-form-title" id="cp-login-form-title">Login</h2>
+  <span class="error" *ngIf="error">{{ error }}</span>
+  <div class="cp-login-inputs-div" id="cp-login-inputs-div">
+    <div class="">
+      <label class="cp-label" for="cp-input-0" id="cp-lable-0">Email</label>
+      <input class="cp-input" type="email" name="email" placeholder="Email" id="cp-input-0" (ngModel)="email" required>
     </div>
     <div class="">
-
-      <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
+      <label class="cp-label" for="cp-input-1" id="cp-lable-1">Password</label>
+      <input class=" cp-input" type="password" name="password" placeholder="Input your password" id="cp-input-1" (ngModel)="password" required>
     </div>
-<div class="">
-  <button type="submit" [disabled]="!formData.valid" class="basic-btn btn btn-primary">Log in</button>
-</div>
-<div class="">
-  <a routerLink="/signup" class="alc">Don't have an account?</a>
-
-</div>
-
-  </form>
-</div>
+  </div>
+  <a routerLink="/signup" id="cp-link-0" class="cp-link">Don't have an account?</a>
+  <button class="cp-button" type="submit" id="cp-login-submit" [disabled]="!formData.valid">Login</button>
+</form>

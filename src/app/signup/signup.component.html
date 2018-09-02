@@ -1,51 +1,26 @@
-<div class="form-container">
 
-  <div class="">
-
-    <a routerLink="/login" id="goback">Go back</a>
-
-
-    <div class="card-header">
-      Join now
-    </div>
-    <span class="error" *ngIf="error">{{ error }}</span>
-  </div>
-
-  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
-    <div class="container">
-      <div class="card">
-        <div class="">
-          <input type="text" placeholder="Name" (ngModel)="displayName" name="displayName" class="txt" required>
-        </div>
-        <div class="">
-
-          <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
-        </div>
-        <div class="">
-
-          <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
-        </div>
-        <!-- upload images -->
-
-        <div class="card-body">
-          <h5 class="card-title">Select your profile picture:</h5>
-          <input type="file" (change)="upload($event)" accept=".png,.jpg" required/>
-        </div>
-        <!-- progress bar -->
-        <div class="progress width">
-          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
-          File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
-
-        </div>
-
-        <button type="submit" [disabled]="!formData.valid" class="basic-btn btn btn-primary">Create my account</button>
-      </div>
-    </div>
-
+<form class="cp-login-form" id="cp-login-form" #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+  <span class="error" *ngIf="error">{{ error }}</span>
+  <h2 class="cp-login-form-title" id="cp-login-form-title">Signup</h2>
+  <div class="cp-login-inputs-div" id="cp-login-inputs-div">
     <div class="">
-
+      <label class="cp-label" for="cp-input-0" id="cp-lable-0">Email</label>
+      <input class="cp-input" type="email" name="email" (ngModel)="email" placeholder="Email" id="cp-input-0" required>
     </div>
-  </form>
-</div>
+    <div><label for="cp-input-2" class="cp-label" id="cp-lable-2">User name</label>
+      <input type="Text" class="cp-input " name="displayName" (ngModel)="displayName" placeholder="Username" id="cp-input-2" required></div>
+  </div>
+  <div class="">
+    <label class="cp-label" for="cp-input-1" id="cp-lable-1">Password</label>
+    <input class=" cp-input" type="password" name="password" (ngModel)="password" placeholder="Input your password" id="cp-input-1" required>
+  </div>
+  <!-- <div class="card-body"> -->
+  <input type="file" (change)="upload($event)" accept=".png,.jpg" required/>
+  <!-- </div> -->
+  <!-- progress bar -->
+  <div class="progress width">
+    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+<a  routerLink="/login">Have an account? Go to login.</a>
+  <button class="cp-button" type="submit" id="cp-login-submit" [disabled]="!formData.valid">Signup</button>
+</form>
