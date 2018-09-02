@@ -113,7 +113,7 @@ export class MembersComponent implements OnInit {
         user_id: this.id,
         date: Date.now(),
         username: this.name.displayName,
-        msgText: true;
+        msgText: true
       };
       if (!this.editMode) {
         console.log('sent msg', msg);
