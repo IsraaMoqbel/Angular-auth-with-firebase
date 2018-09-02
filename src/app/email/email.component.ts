@@ -4,7 +4,6 @@ import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/databa
 import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 
-
 @Component({
   selector: 'app-email',
   templateUrl: './email.component.html',
@@ -26,7 +25,6 @@ export class EmailComponent implements OnInit {
 
       }
     });
-
   }
 
   onSubmit(formData) {
