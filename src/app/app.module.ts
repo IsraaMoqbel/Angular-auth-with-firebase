@@ -19,6 +19,7 @@ import { routingComponents } from './app.routes';
 import { RoutesModule } from './app.routes';
 import { AuthService } from './auth.service';
 import { routes } from './app.routes';
+import { DefaultimgPipe } from './defaultimg.pipe';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDYxbDw2atup9Fgoz5S2tPPPVeKH9rG0qE",
@@ -31,7 +32,8 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    DefaultimgPipe
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ export const firebaseConfig = {
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
    AngularFireStorageModule // imports firebase/storage only needed for storage features
+
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

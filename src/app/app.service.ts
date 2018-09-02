@@ -15,52 +15,32 @@ export class AppService {
   users: AngularFirestoreCollection<User>;
   private taskDoc: AngularFirestoreDocument<Msg>;
   constructor(private db: AngularFirestore) {
-    //Get the tasks collection
+    //Get the msgs and users collection
     this.msgs = db.collection<Msg>(config.collection_endpoint);
     this.users = db.collection<User>(config.users_endpoint);
   }
 
   addMsg(msg) {
-  //Add the new task to the collection
+  //Add the new msg to the collection
   this.msgs.add(msg);
-} //addTask
+} //addTMsg
 
 addUser(user){
   this.users.add(user);
 }
 
 updateMsg(id, update) {
-   //Get the task document
+   //Get the msg document
    this.taskDoc = this.db.doc<Msg>(`${config.collection_endpoint}/${id}`);
    this.taskDoc.update(update);
-} //updateTask
+} //updateMsg
 
 deleteMsg(id) {
-   //Get the task document
+   //Get the msg document
    this.taskDoc = this.db.doc<Msg>(`${config.collection_endpoint}/${id}`);
    //Delete the document
    this.taskDoc.delete();
-} //deleteTask
+} //deleteMsg
 
-// saveTask() {
-//    if (this.myTask !== null) {
-//       //Get the input value
-//       let task = {
-//          description: this.myTask
-//       };
-//       if (!this.editMode) {
-//          console.log(task);
-//          this.taskService.addTask(task);
-//       } else {
-//          //Get the task id
-//          let taskId = this.taskToEdit.id;
-//          //update the task
-//          this.taskService.updateTask(taskId, task);
-//       }
-//       //set edit mode to false and clear form
-//       this.editMode = false;
-//       this.myTask = “”;
-//    }
-// } //saveTask
 
 }

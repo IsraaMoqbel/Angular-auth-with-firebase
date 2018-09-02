@@ -4,28 +4,48 @@
 
     <a routerLink="/login" id="goback">Go back</a>
 
-    <h2>Join now</h2>
 
-    <span class="error" *ngIf="error" >{{ error }}</span>
+    <div class="card-header">
+      Join now
+    </div>
+    <span class="error" *ngIf="error">{{ error }}</span>
   </div>
 
   <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+    <div class="container">
+      <div class="card">
+        <div class="">
+          <input type="text" placeholder="Name" (ngModel)="displayName" name="displayName" class="txt" required>
+        </div>
+        <div class="">
+
+          <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
+        </div>
+        <div class="">
+
+          <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
+        </div>
+        <!-- upload images -->
+
+        <div class="card-body">
+          <h5 class="card-title">Select your profile picture:</h5>
+          <input type="file" (change)="upload($event)" accept=".png,.jpg" required/>
+        </div>
+        <!-- progress bar -->
+        <div class="progress width">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+          File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
+
+        </div>
+
+        <button type="submit" [disabled]="!formData.valid" class="basic-btn btn btn-primary">Create my account</button>
+      </div>
+    </div>
+
     <div class="">
 
-      <input type="text" placeholder="Name" (ngModel)="displayName" name="displayName" class="txt" required>
     </div>
-<div class="">
-
-  <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
-</div>
-<div class="">
-
-  <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
-</div>
-
-<div class="">
-
-  <button type="submit" [disabled]="!formData.valid" class="basic-btn btn btn-primary">Create my account</button>
-</div>
   </form>
 </div>

@@ -51,6 +51,10 @@ justify-content: space-between;
   background: rgba(0, 114, 135, 0.1);
   border: 2px solid rgba(0, 114, 135, 0.1);
   align-self: flex-start;
+  display: flex;
+flex-flow: column;
+justify-content: flex-start;
+align-items: flex-start;
 }
 
 .message-partner:after {
@@ -80,6 +84,9 @@ justify-content: space-between;
 }
 ul {
   list-style: none;
+  display: flex;
+  flex-flow: column;
+  margin-right: 30px;
 }
 .inner{
   display: flex;
@@ -91,10 +98,12 @@ ul {
 .usersDiv {
    background-color: #e7f1f3;
   margin-right: 20px;
+  position: fixed;
+  height: 100%;
 }
 
 li {
-  margin-right: 35px;
+margin: auto;
 }
 .nameDiv {
   margin-top: 25px;
@@ -112,8 +121,62 @@ li {
 .frm {
   display: flex;
   flex-flow: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .inpt {
-      width: 250%;
+      /* width: 225%; */
+      max-width: 200px;
+}
+
+.profileImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.msgs {
+  width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+}
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+    border-radius: 50%;
+}
+.upload-btn-wrapper:hover{
+    background-color: gray;
+}
+
+.btn1 {
+  border: 1px gray;
+  color: gray;
+  background-color: white;
+  padding: 4px 10px;
+  border-radius: 50%;
+  cursor: pointer !important;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 80px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer !important;
+}
+.clip {
+  padding: 0;
+  width: 20px;
+  margin: auto;
+}
+.crop {
+  /* width:100px;
+  height:100px; */
+
 }

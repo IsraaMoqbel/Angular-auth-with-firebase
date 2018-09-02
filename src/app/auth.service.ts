@@ -14,7 +14,6 @@ export class AuthService {
       if (!auth) {
         console.log('not authorized')
       } else {
-        console.log('auth in service', auth)
         this.router.navigate(['/members']);
 
       }

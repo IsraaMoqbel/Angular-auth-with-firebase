@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import {AppService} from '../app.service'
 import { Router } from '@angular/router';
-
+import { Observable } from 'rxjs/Observable';
+import { finalize } from 'rxjs/operators';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -12,8 +14,13 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   state: string = '';
   error: any;
-
-  constructor(public af: AngularFireAuth, private router: Router,private appService: AppService) {}
+  downloadURL: Observable<string>;
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  uploadState: Observable<string>;
+  uploadProgress: Observable<number>;
+  downloadSrc:string;
+  constructor(public af: AngularFireAuth, private router: Router,private appService: AppService, private afStorage: AngularFireStorage) {}
 
   onSubmit(formData) {
     if (formData.valid) {
@@ -25,7 +32,7 @@ export class SignupComponent implements OnInit {
       .then(
         (success) => {
           console.log('success', success);
-            this.appService.addUser({username: formData.value.displayName})
+            this.appService.addUser({username: formData.value.displayName,photoURL: this.downloadSrc || null,date:Date.now()})
 
           this.router.navigate(['/login'])
         }).catch(
@@ -39,11 +46,28 @@ export class SignupComponent implements OnInit {
       if (auth) {
         auth.updateProfile({
           displayName: formData.value.displayName, // some displayName,
-          photoURL: 'xxxxxx'// some photo url
+          photoURL: this.downloadSrc// some photo url
         })
       }
     });
   }
+  upload(event) {
+    const id = Math.random().toString(36).substring(2);
+    this.ref = this.afStorage.ref(id);
+    this.task = this.ref.put(event.target.files[0]);
+    this.uploadProgress = this.task.percentageChanges();
+
+    this.task.snapshotChanges().pipe(
+      finalize(() => {
+     this.ref.getDownloadURL().subscribe(url => {
+       console.log(url); // <-- do what ever you want with the url..
+       this.downloadSrc=url;
+     });
+   })
+    )
+    .subscribe()
+  }
+
 
   ngOnInit() {
   }

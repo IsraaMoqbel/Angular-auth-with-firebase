@@ -11,6 +11,8 @@ import { Msg, User } from '../app.model';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/take';
+import { finalize } from 'rxjs/operators';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
 
 @Component({
   selector: 'app-members',
@@ -26,11 +28,16 @@ export class MembersComponent implements OnInit {
   editMode: boolean = false;
   msgToEdit: any = {};
 
-  constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router, private db: AngularFirestore, private appService: AppService) {
+  downloadURL: Observable<string>;
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  uploadState: Observable<string>;
+  uploadProgress: Observable<number>;
+
+  constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router, private db: AngularFirestore, private appService: AppService, private afStorage: AngularFireStorage) {
 
     this.af.auth.onAuthStateChanged(auth => {
       if (auth) {
-        console.log('auth in members', auth)
         this.id = auth.uid;
         this.name = auth;
         this.router.navigate(['/members']);
@@ -39,7 +46,7 @@ export class MembersComponent implements OnInit {
 
       }
     });
-    
+
   }
 
   logout() {
@@ -73,6 +80,7 @@ export class MembersComponent implements OnInit {
           return { id, ...data };
         })
       });
+
     this.users = this.db
       .collection(config.users_endpoint)
       .snapshotChanges()
@@ -104,15 +112,16 @@ export class MembersComponent implements OnInit {
         msg: this.myMsg,
         user_id: this.id,
         date: Date.now(),
-        username: this.name.displayName
+        username: this.name.displayName,
+        msgText: true;
       };
       if (!this.editMode) {
         console.log('sent msg', msg);
         this.appService.addMsg(msg);
       } else {
-        //Get the task id
+        //Get the msg id
         let msgId = this.msgToEdit.id;
-        //update the task
+        //update the msg
         this.appService.updateMsg(msgId, msg);
       }
       //set edit mode to false and clear form
@@ -129,4 +138,42 @@ export class MembersComponent implements OnInit {
   deleteMsg(msg) {
     this.appService.deleteMsg(msg)
   }
+
+  upload(event) {
+    const id = Math.random().toString(36).substring(2);
+    this.ref = this.afStorage.ref(id);
+    this.task = this.ref.put(event.target.files[0]);
+    this.uploadProgress = this.task.percentageChanges();
+
+    this.task.snapshotChanges().pipe(
+      finalize(() => {
+        this.ref.getDownloadURL().subscribe(url => {
+
+          //Get the input value
+          let msg = {
+            msg: url,
+            user_id: this.id,
+            date: Date.now(),
+            username: this.name.displayName,
+            msgText: false
+          };
+          if (!this.editMode) {
+            console.log('sent msg', msg);
+            this.appService.addMsg(msg);
+          } else {
+            //Get the msg id
+            let msgId = this.msgToEdit.id;
+            //update the msg
+            this.appService.updateMsg(msgId, msg);
+          }
+          //set edit mode to false and clear form
+          this.editMode = false;
+
+          console.log(url); // <-- do what ever you want with the url..
+        });
+      })
+    )
+      .subscribe()
+  }
+
 }

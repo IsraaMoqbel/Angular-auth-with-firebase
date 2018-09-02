@@ -1,21 +1,19 @@
-
-
 <div class="form-container" id="toolbar">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/members">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"> {{ name.displayName }}!</a>
-      </li>
-    </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/members">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"> {{ name.displayName }}!</a>
+        </li>
+      </ul>
 
-    <button (click)="logout()" class="basic-btn btn btn-primary">Logout</button>
-  </div>
-</nav>
+      <button (click)="logout()" class="basic-btn btn btn-primary">Logout</button>
+    </div>
+  </nav>
 
 </div>
 
@@ -26,11 +24,12 @@
     <div class="msgsAndUsers">
       <div class="usersDiv">
         <h4 class="usersTitle">Users</h4>
-        <ul  *ngFor="let user of users|async; let i = index" [attr.data-index]="i">
+        <ul *ngFor="let user of users|async; let i = index" [attr.data-index]="i">
+          <img class="profileImage" [src]="user.photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'" />
           <li>{{user.username}}</li>
         </ul>
       </div>
-      <div>
+      <div class="msgs">
         <table class="table table-hover">
           <tr>
             <th>Msgs</th>
@@ -39,15 +38,18 @@
           <tr *ngFor="let msg of msgs|async; let i = index" [attr.data-index]="i">
 
             <td>
-              <div class="message-sender contain" ><a href="#"><strong>{{msg.username}}</strong></a></div>
+              <div class="message-sender contain"><a href="#"><strong>{{msg.username}}</strong></a></div>
 
               <div class="message-box message-partner ">
-
-                <div class="msg">
-                  {{msg.msg}}
+                <div class="msg" *ngIf="msg.msgText">
+                  <div class="">
+                    {{msg.msg}} {{msg.msgText}}
+                  </div>
                 </div>
-                  <div class="buttons">
-                    <div class="inner">
+                <img class="crop" src="{{msg.msg}}" alt="" *ngIf="!msg.msgText">
+
+                <div class="buttons">
+                  <div class="inner">
 
                     <button [hidden]='msg.show' class="btn btn-success buttonClass" (click)="edit(msg)">
                        <i class="fa fa-edit"></i>
@@ -72,9 +74,24 @@
 
     <form #f="ngForm" class="frm">
       <div class="form-group ">
-        <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control inpt" placeholder="Enter Msg" required>
+        <p class="lead emoji-picker-container">
+          <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control inpt" placeholder="Enter Msg" data-emojiable="true"></p>
+
+
+        <!-- progress bar -->
+        <div class="progress width">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
       </div>
       <div class="form-group">
+        <div class="card-body clip">
+          <div class="upload-btn-wrapper">
+            <button class="btn btn1"><i class="fas fa-paperclip"></i></button>
+            <input type="file" (change)="upload($event)" accept=".png,.jpg" name="myfile" required/>
+          </div>
+
+        </div>
         <button class="btn btn-primary" [disabled]="!f.valid" (click)="saveMsg()">
         Send
       </button>

@@ -11,3 +11,18 @@
 input {
   margin-top: 20px;
 }
+.width {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 40px;
+}
+.btn {
+  width: 50%;
+    margin: auto;
+}
+.card-header {
+  width: 78%;
+    margin: auto;
+    border-radius: 5px 5px 0 0;
+    font-size: 30px;
+}
