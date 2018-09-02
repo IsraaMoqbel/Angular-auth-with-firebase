@@ -24,9 +24,10 @@
     <div class="msgsAndUsers">
       <div class="usersDiv">
         <h4 class="usersTitle">Users</h4>
-        <ul *ngFor="let user of users|async; let i = index" [attr.data-index]="i">
-          <img class="profileImage" [src]="user.photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'" />
-          <li>{{user.username}}</li>
+        <ul *ngFor="let user of users|async; let i = index" [attr.data-index]="i" >
+          <img class="profileImage" [src]="user.photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'"  routerLink="/user/{{user.username}}"/>
+
+          <li  ><a routerLink="/user/{{user.username}}">{{user.username}}</a></li>
         </ul>
       </div>
       <div class="msgs">

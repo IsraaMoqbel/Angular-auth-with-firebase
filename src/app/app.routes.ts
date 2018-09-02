@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { MembersComponent } from './members/members.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { SignupComponent } from './signup/signup.component';
@@ -16,7 +17,7 @@ export const router: Routes = [
   {
     path: 'members', component: MembersComponent
     , canActivate: [AuthGuard]
-  }
+  },{ path: 'user/:username', component: UserprofileComponent }
 ]
 
 @NgModule({
