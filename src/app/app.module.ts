@@ -34,8 +34,7 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     routingComponents,
-    DefaultimgPipe,
-    UserprofileComponent
+    DefaultimgPipe
   ],
   imports: [
     BrowserModule,

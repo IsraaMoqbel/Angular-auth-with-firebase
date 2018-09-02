@@ -31,4 +31,4 @@ export const router: Routes = [
 
 export class RoutesModule { }
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
-export const routingComponents = [SignupComponent, EmailComponent, MembersComponent]
+export const routingComponents = [SignupComponent, EmailComponent, MembersComponent,UserprofileComponent]
