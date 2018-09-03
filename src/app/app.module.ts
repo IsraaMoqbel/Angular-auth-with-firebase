@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { AngularFireModule } from 'angularfire2';
+// import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule} from 'angularfire2';
 // for auth
 import { AngularFireAuthModule } from 'angularfire2/auth';
 // for database
@@ -10,6 +11,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 //firebase modules
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+
 
 import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
@@ -21,6 +23,7 @@ import { AuthService } from './auth.service';
 import { routes } from './app.routes';
 import { DefaultimgPipe } from './defaultimg.pipe';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDYxbDw2atup9Fgoz5S2tPPPVeKH9rG0qE",
