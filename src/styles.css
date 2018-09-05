@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* visited link */
+a:visited {
+    color: #00356d;
+}
+
+/* mouse over link */
+a:hover {
+    color: #6eb3fd;
+}
+
+/* selected link */
+a:active {
+    color: pink;
+}
+
+input[type=text] {
+  width: 100px;
+  -webkit-transition: width .35s ease-in-out;
+  transition: width .35s ease-in-out;
+}

@@ -35,7 +35,8 @@ export class SignupComponent implements OnInit {
       .then(
         (success) => {
           console.log('success', success);
-            this.appService.addUser({username: formData.value.displayName,photoURL: this.downloadSrc || null,date:Date.now()})
+          console.log('success', success.user.uid);
+            this.appService.addUser({uid:success.user.uid,email:formData.value.email,displayName: formData.value.displayName,username: formData.value.displayName,photoURL: this.downloadSrc || null,date:Date.now()})
 
           this.router.navigate(['/login'])
         }).catch(

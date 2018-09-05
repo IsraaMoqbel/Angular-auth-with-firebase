@@ -5,6 +5,7 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="/members">Home <span class="sr-only">(current)</span></a>
+
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/user/{{name.displayName}}"> {{ name.displayName }}!</a>
@@ -12,6 +13,7 @@
       </ul>
 
       <button (click)="logout()" class="basic-btn btn btn-primary">Logout</button>
+
     </div>
   </nav>
 
@@ -39,7 +41,7 @@
           <tr *ngFor="let msg of msgs|async; let i = index" [attr.data-index]="i">
 
             <td>
-              <div class="message-sender contain"><a href="#"><strong>{{msg.username}}</strong></a></div>
+              <div class="message-sender contain"><a routerLink="/user/{{msg.username}}"><strong>{{msg.username}}</strong> at {{msg.date | date:'medium'}}</a></div>
 
               <div class="message-box message-partner ">
                 <div class="msg" *ngIf="msg.msgText">
@@ -76,7 +78,9 @@
     <form #f="ngForm" class="frm">
       <div class="form-group ">
         <p class="lead emoji-picker-container">
-          <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control inpt" placeholder="Enter Msg" data-emojiable="true"></p>
+          <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control inpt" placeholder="Enter Msg" data-emojiable="true" data-emoji-input="unicode"></p>
+          
+
         </div>
           <div class="form-group">
             <div class="card-body clip">

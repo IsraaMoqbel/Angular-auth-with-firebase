@@ -1,10 +1,15 @@
 export interface Msg {
-    // id: string;
     msg: string;
     username:string;
-    show:boolean
+    show:boolean;
+
 }
 export interface User {
     // id: string;
+        uid: string;
     username:string;
+    photoURL?: string;
+ displayName?: string;
+
+  fcmTokens?: { [token: string]: true };
 }

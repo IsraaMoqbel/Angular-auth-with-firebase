@@ -17,6 +17,9 @@ import { Msg } from './app.model';
 export class AppComponent {
   title = 'Authentication';
 
-  constructor(public authService: AuthService, private router: Router, public af: AngularFireAuth, private db: AngularFirestore, private appService: AppService) { }
+  constructor(public authService: AuthService, private router: Router, public af: AngularFireAuth, private db: AngularFirestore, private appService: AppService) {
+  }
+ngOnInit(){
 
+}
 }

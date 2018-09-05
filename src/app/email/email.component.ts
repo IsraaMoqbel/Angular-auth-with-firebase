@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/databa
 import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 
+
 @Component({
   selector: 'app-email',
   templateUrl: './email.component.html',
@@ -19,7 +20,9 @@ export class EmailComponent implements OnInit {
       if (!auth) {
         console.log('not authorized')
         // this.name = auth;
+
       } else {
+
         console.log('auth in members', auth)
         // this.router.navigate(['/members']);
 

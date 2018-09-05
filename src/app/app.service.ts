@@ -43,7 +43,6 @@ deleteMsg(id) {
 } //deleteMsg
 
 getUser(username:string){
-  console.log('i\'m in')
   this.users = this.db
     .collection(config.users_endpoint)
     .snapshotChanges()

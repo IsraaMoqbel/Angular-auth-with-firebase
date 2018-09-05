@@ -14,6 +14,8 @@ import 'rxjs/add/operator/take';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
 
+import 'rxjs/add/operator/filter';
+
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
@@ -46,7 +48,6 @@ export class MembersComponent implements OnInit {
 
       }
     });
-
   }
 
   logout() {
@@ -94,6 +95,8 @@ export class MembersComponent implements OnInit {
           return { id, ...data };
         })
       });
+
+
   }
 
   edit(msg) {

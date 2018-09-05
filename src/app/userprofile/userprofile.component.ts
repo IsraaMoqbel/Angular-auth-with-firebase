@@ -12,7 +12,7 @@ import { AuthService } from './../auth.service';
 export class UserprofileComponent implements OnInit {
 username:string;
 photoURL:string;
-
+dateReg:any;
   constructor(private router: Router,private route:ActivatedRoute,  public appService: AppService, public authService: AuthService) {
 
    }
@@ -32,6 +32,7 @@ photoURL:string;
         if(user.username == username){
           console.log(user)
           this.photoURL = user.photoURL;
+          this.dateReg=user.date;
         }
       })
     })
