@@ -1,0 +1,13 @@
+<div class="form-container" id="toolbar">
+
+  <ul class="cp-navbar-container" style="height: 70px;">
+    <li id="newLiElementInNavbar-1" class="cp-list"><a class="active" href="/members">Home</a></li>
+    <li id="newLiElementInNavbar-2" class="cp-list"><a routerLink="/user/{{username}}"> {{ username }}</a></li>
+    <li id="newLiElementInNavbar-3" class="cp-list"><a routerLink="/users">Users</a></li>
+    <li id="newLiElementInNavbar-4"  *ngIf='!login'><a class="darkblue" (click)="logout()">Logout</a></li>
+    <li id="newLiElementInNavbar-4" *ngIf='login'><a class="darkblue" routerLink="/login">Login</a></li>
+    <li id="newLiElementInNavbar-4" *ngIf='login'><a class="darkblue" routerLink="/signup">Signup</a></li>
+    <li id="cp-navbar-fix-holder"> </li>
+  </ul>
+
+</div>

@@ -15,7 +15,6 @@ export class EmailComponent implements OnInit {
   email:string;
   password:string;
   constructor(public af: AngularFireAuth, private router: Router, public authService: AuthService) {
-    console.log('Email activate', this.af.auth.currentUser)
     this.af.auth.onAuthStateChanged(auth => {
       if (!auth) {
         console.log('not authorized')
@@ -32,7 +31,6 @@ export class EmailComponent implements OnInit {
 
   onSubmit(formData) {
     if (formData.valid) {
-      console.log(formData.value);
       this.authService.loginWithEmail(formData.value.email, formData.value.password).then((data) => {
         this.router.navigate(['/members']);
       })

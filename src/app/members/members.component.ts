@@ -22,14 +22,14 @@ import 'rxjs/add/operator/filter';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  name: any = 'Israa';
+  user: any;
   msgs: Observable<any[]>;
   users: Observable<any[]>;
   id: any;
   myMsg: string;
   editMode: boolean = false;
   msgToEdit: any = {};
-
+  username:string;
   downloadURL: Observable<string>;
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
@@ -38,10 +38,11 @@ export class MembersComponent implements OnInit {
 
   constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router, private db: AngularFirestore, private appService: AppService, private afStorage: AngularFireStorage) {
 
-    this.af.auth.onAuthStateChanged(auth => {
-      if (auth) {
-        this.id = auth.uid;
-        this.name = auth;
+    this.af.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        this.id = authUser.uid;
+        this.user = authUser;
+        this.username=authUser.displayName;
         this.router.navigate(['/members']);
       } else {
         this.router.navigate(['/login']);
@@ -50,58 +51,21 @@ export class MembersComponent implements OnInit {
     });
   }
 
-  logout() {
-    const x = this
-    this.authService.logout().then(function() {
-      console.log('logged out');
-      x.router.navigateByUrl('/login');
-    }).catch(function(error) {
-      // An error happened.
-    });
-  }
+
   ngOnInit() {
     // this.msgs = this.db.collection(config.collection_endpoint).valueChanges();
+    this.af.auth.onAuthStateChanged(auth => {
+      if(auth){
+        this.msgs = this.appService.getMsgs(this.id);
+      }
+    });
 
-    this.msgs = this.db
-      .collection(config.collection_endpoint, ref => ref.orderBy('date'))
-      .snapshotChanges()
-      .map(actions => {
-        return actions.map(a => {
-          //Get document data
-          const data = a.payload.doc.data() as Msg;
-          //Get document id
-          const id = a.payload.doc.id;
-
-          if (this.name.displayName === data.username) {
-            data.show = false;
-          } else {
-            data.show = true;
-          }
-          //Use spread operator to add the id to the document data
-          return { id, ...data };
-        })
-      });
-
-    this.users = this.db
-      .collection(config.users_endpoint)
-      .snapshotChanges()
-      .map(actions => {
-        return actions.map(a => {
-          //Get document data
-          const data = a.payload.doc.data() as User;
-          //Get document id
-          const id = a.payload.doc.id;
-          //Use spread operator to add the id to the document data
-          return { id, ...data };
-        })
-      });
-
+    this.users = this.appService.getUsers();
 
   }
 
   edit(msg) {
-    console.log(msg);
-    //Set taskToEdit and editMode
+    //Set msgToEdit and editMode
     this.msgToEdit = msg;
     this.editMode = true;
     //Set form value
@@ -115,14 +79,18 @@ export class MembersComponent implements OnInit {
         msg: this.myMsg,
         user_id: this.id,
         date: Date.now(),
-        username: this.name.displayName,
+        username: this.user.displayName,
         msgText: true
       };
       if (!this.editMode) {
-        console.log('sent msg', msg);
         this.appService.addMsg(msg);
+          window.scrollTo(0,document.body.scrollHeight);
       } else {
         //Get the msg id
+        let msg = {
+          msg: this.myMsg,
+          msgText: true
+        };
         let msgId = this.msgToEdit.id;
         //update the msg
         this.appService.updateMsg(msgId, msg);
@@ -131,12 +99,7 @@ export class MembersComponent implements OnInit {
       this.editMode = false;
       this.myMsg = '';
     }
-  } //saveTask
-
-  addMsg(msg) {
-    console.log('ssss', JSON.parse(msg), typeof (JSON.parse(msg)))
-    this.appService.addMsg({ msg: 'hellooo as manual msg' })
-  }
+  } //saveMsg
 
   deleteMsg(msg) {
     this.appService.deleteMsg(msg)
@@ -152,31 +115,25 @@ export class MembersComponent implements OnInit {
       finalize(() => {
         this.ref.getDownloadURL().subscribe(url => {
 
-          //Get the input value
           let msg = {
             msg: url,
             user_id: this.id,
             date: Date.now(),
-            username: this.name.displayName,
+            username: this.user.displayName,
             msgText: false
           };
-          if (!this.editMode) {
-            console.log('sent msg', msg);
+
             this.appService.addMsg(msg);
-          } else {
-            //Get the msg id
-            let msgId = this.msgToEdit.id;
-            //update the msg
-            this.appService.updateMsg(msgId, msg);
-          }
+
           //set edit mode to false and clear form
           this.editMode = false;
-
-          console.log(url); // <-- do what ever you want with the url..
         });
       })
+
     )
       .subscribe()
   }
+
+
 
 }

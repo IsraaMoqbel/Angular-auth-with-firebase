@@ -1,0 +1,36 @@
+
+.cp-navbar-container>li a.active {
+  color: #014d9e;
+  font-weight: bold;
+}
+
+.cp-navbar-container>li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+.cp-navbar-container>li a {
+  font-size: 1em;
+  color: #5cabff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cp-navbar-container {
+  display: flex;
+  background-color: rgb(210, 229, 233);
+}
+
+#cp-navbar-fix-holder {
+  flex: 1 1 0%;
+  float: left
+}
+
+.cp-navbar-container {
+  position: fixed;
+  width: 100%;
+}

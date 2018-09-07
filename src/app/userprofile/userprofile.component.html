@@ -1,23 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/members">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/user/{{username}}"> {{ username }}!</a>
-      </li>
-    </ul>
-
-    <button (click)="logout()" class="basic-btn btn btn-primary">Logout</button>
-  </div>
-</nav>
+<app-navbar [login]=false></app-navbar>
 
 <div>
 
 <img class="profileImage userInfo" [src]="photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'"  routerLink="/user/{{username}}"/>
 
-<h1  class="">Welcome {{username}}</h1>
-<h2  class="">Registered since </h2>
-<h3>{{dateReg |date:'medium'}}</h3>
+<h1  class="color">Welcome {{username}}</h1>
+<h2  class="color2">Registered since </h2>
+<h3  class="color">{{dateReg |date:'medium'}}</h3>
+</div>
+
+<div *ngIf="registeredUser==username">
+
+<h4>You can update your data here!</h4>
+<form #f="ngForm" class="form-group formInput frm">
+
+    <input [(ngModel)]="updateUsername" name="updateUsername" type="text" class="form-control inpt" placeholder="Enter new username" value={{updateUsername}}>
+    <button class="btn btn-primary send" [disabled]="!f.valid" (click)="updateUser()" >
+        Update
+      </button>
+
+
+</form>
+<div class="form-group">
+        To update your profile picture choose another picture here.. 
+  <div class="card-body clip">
+
+    <div class="upload-btn-wrapper">
+
+      <button class="btn btn1"><i class="fas fa-paperclip"></i></button>
+      <input type="file" (change)="upload($event)" accept=".png,.jpg" name="myfile" required/>
+    </div>
+
+  </div>
+</div>
 </div>

@@ -1,0 +1,20 @@
+<input type="text" (keydown)="search($event)" placeholder="search users..." class="input">
+
+<div *ngFor="let user of filteredUsers">
+  <h4>{{user?.username}}</h4>
+  <p>
+    <img class="profileImage" [src]="user.photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'" routerLink="/user/{{user.username}}" />
+
+  </p>
+  <p>registered in {{user?.date |date:'medium'}} </p>
+  <p *ngIf="user?.email">with email {{user?.email}}</p>
+
+
+  <div *ngIf="user?.length < 1">
+    <hr>
+    <!-- <p>
+     No results found :(
+   </p> -->
+  </div>
+
+</div>

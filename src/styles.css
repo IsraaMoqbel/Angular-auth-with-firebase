@@ -1,5 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
 
+*{
+  margin:0;
+  padding:0;
+}
+
+a{
+  cursor: pointer;
+}
 /* visited link */
 a:visited {
     color: #00356d;
@@ -15,8 +22,23 @@ a:active {
     color: pink;
 }
 
-input[type=text] {
-  width: 100px;
-  -webkit-transition: width .35s ease-in-out;
-  transition: width .35s ease-in-out;
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #97dfef;
+     border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #00c7f1;
 }

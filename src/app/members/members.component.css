@@ -1,11 +1,9 @@
 .msgsAndUsers {
   display: flex;
   flex-flow: row;
+  margin-top: 69px
 }
-.usersTable {
-  background-color: lightblue;
-  margin-right: 20px;
-}
+
 .message-sender {
   display: flex;
   font-size: 12px;
@@ -14,16 +12,10 @@
   align-self: flex-start;
 }
 
-.message-sender a,
-.message-sender a:link,
-.message-sender a:visited,
-.chat-partner-name a,
-.chat-partner-name a:link,
-.chat-partner-name a:visited {
+.message-sender a, .message-sender a:link, .message-sender a:visited, .chat-partner-name a, .chat-partner-name a:link, .chat-partner-name a:visited {
   color: #30649c;
   text-decoration: none;
 }
-
 
 .message-box {
   padding: 6px 10px;
@@ -34,7 +26,7 @@
   color: #6c6c6c;
   font-size: 18px;
   display: flex;
-justify-content: space-between;
+  justify-content: space-between;
 }
 
 .message-box:after {
@@ -52,10 +44,10 @@ justify-content: space-between;
   border: 2px solid rgba(0, 114, 135, 0.1);
   align-self: flex-start;
   display: flex;
-flex-flow: column;
-justify-content: flex-start;
-align-items: flex-start;
--webkit-max-logical-width: max-content;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  -webkit-max-logical-width: max-content;
 }
 
 .message-partner:after {
@@ -70,97 +62,87 @@ align-items: flex-start;
 
 .buttonClass {
   font-size: 10px;
-  width: 15px;
+  width: 18px;
   border-radius: 12px;
   display: flex;
   justify-content: center;
-}
-.table th {
-  width: 100%;
 }
 
 .contain {
   display: flex;
   flex-flow: row;
 }
-ul {
-  list-style: none;
-  display: flex;
-  flex-flow: column;
-  margin-right: 30px;
-}
-.inner{
+
+.inner {
   display: flex;
   flex-flow: row;
   justify-content: flex-end;
-
 }
 
 .usersDiv {
-   background-color: #e7f1f3;
+  background-color: #e7f1f3;
   margin-right: 20px;
   position: fixed;
-  height: 100%;
-  margin-top: 55px;
+  height: 90%;
 }
 
 li {
-margin: auto;
+  margin: auto;
 }
+
 .nameDiv {
   margin-top: 25px;
 }
+
 .usersTitle {
   margin-top: 15px;
   font-size: 20px;
   font-weight: bold;
-
+  color: #014d9e;
 }
+
 .bg-light {
-    background-color: #d2e5e9!important;
+  background-color: #d2e5e9 !important;
 }
 
 .frm {
-  margin: auto;
-  width: 68%;
   display: flex;
-  flex-flow: row;
-  position: fixed;
-  left: 1005px;
-  bottom: 50px;
-  width: 100%;
-  color: white;
-  text-align: center;
+  justify-content: flex-end;
+  margin-right: 50px;
+  margin-left: 13%;
 }
+
 .inpt {
-      /* width: 225%; */
-      max-width: 200px;
+  min-width: 200px;
+  max-height: 30px;
+  padding: 5px;
 }
 
 .profileImage {
-  width: 80px;
-  height: 80px;
+  width: 35%;
+  height: 35%;
   border-radius: 50%;
   cursor: pointer;
 }
-.msgs {
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  flex-flow: column;
-  margin-left: 155px
-}
 
+.msgs {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  margin-left: 13%;
+  margin-right: 13%;
+}
 
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;
   display: inline-block;
   cursor: pointer;
-    border-radius: 50%;
+  border-radius: 50%;
 }
-.upload-btn-wrapper:hover{
-    background-color: gray;
+
+.upload-btn-wrapper:hover {
+  background-color: gray;
 }
 
 .btn1 {
@@ -180,22 +162,68 @@ margin: auto;
   opacity: 0;
   cursor: pointer !important;
 }
+
 .clip {
   padding: 0;
   width: 20px;
   margin: auto;
+  margin-left: 5px;
 }
+
 .width {
   margin: auto;
   width: 50%;
   background-color: white
 }
-.send{
-  height: 35px;
-  margin-left: 30px
+
+.send {
+  height: 32px;
+  padding: 5px;
+  margin-left: 15px;
+  width: 60px;
 }
 
-.navbar {
-  position: fixed;
-  width: 100%;
+
+#wrapper {
+  width: 11%;
+  overflow: auto;
+}
+
+.th {
+  color: #014d9e;
+}
+
+.formInput {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+}
+
+.cp-navbar-container>li a.darkblue {
+  color: #014d9e;
+  font-weight: bold;
+}
+
+.userLi {
+  font-size: .9rem;
+}
+
+.msgs>ul li {
+  list-style: none;
+  padding: .5em;
+}
+
+.crop {
+  width: 50%;
+  height: 50%;
+}
+
+@media (max-width: 600px) {
+  .inpt {
+    min-width: 20%;
+  }
+  .usersDiv {
+    display: none;
+  }
+
 }

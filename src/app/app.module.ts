@@ -23,6 +23,9 @@ import { AuthService } from './auth.service';
 import { routes } from './app.routes';
 import { DefaultimgPipe } from './defaultimg.pipe';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { UsersComponent } from './users/users.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UsersSearchComponent } from './users-search/users-search.component';
 
 
 export const firebaseConfig = {
@@ -37,7 +40,10 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     routingComponents,
-    DefaultimgPipe
+    DefaultimgPipe,
+    UsersComponent,
+    NavbarComponent,
+    UsersSearchComponent
   ],
   imports: [
     BrowserModule,

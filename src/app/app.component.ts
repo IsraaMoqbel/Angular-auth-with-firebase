@@ -15,7 +15,7 @@ import { Msg } from './app.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Authentication';
+  title = 'Chat';
 
   constructor(public authService: AuthService, private router: Router, public af: AngularFireAuth, private db: AngularFirestore, private appService: AppService) {
   }

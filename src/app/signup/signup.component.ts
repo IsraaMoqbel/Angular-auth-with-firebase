@@ -27,15 +27,12 @@ export class SignupComponent implements OnInit {
 
   onSubmit(formData) {
     if (formData.valid) {
-      console.log(formData.value);
       this.af.auth.createUserWithEmailAndPassword(
         formData.value.email,
         formData.value.password
       )
       .then(
         (success) => {
-          console.log('success', success);
-          console.log('success', success.user.uid);
             this.appService.addUser({uid:success.user.uid,email:formData.value.email,displayName: formData.value.displayName,username: formData.value.displayName,photoURL: this.downloadSrc || null,date:Date.now()})
 
           this.router.navigate(['/login'])
@@ -64,7 +61,6 @@ export class SignupComponent implements OnInit {
     this.task.snapshotChanges().pipe(
       finalize(() => {
      this.ref.getDownloadURL().subscribe(url => {
-       console.log(url); // <-- do what ever you want with the url..
        this.downloadSrc=url;
      });
    })

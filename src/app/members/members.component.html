@@ -1,106 +1,84 @@
-<div class="form-container" id="toolbar">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/members">Home <span class="sr-only">(current)</span></a>
-
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/user/{{name.displayName}}"> {{ name.displayName }}!</a>
-        </li>
-      </ul>
-
-      <button (click)="logout()" class="basic-btn btn btn-primary">Logout</button>
-
-    </div>
-  </nav>
-
-</div>
+<app-navbar [login]=false></app-navbar>
 
 <section>
   <div class="column">
     <div class="col-md-6">
     </div>
     <div class="msgsAndUsers">
-      <div class="usersDiv">
-        <h4 class="usersTitle">Users</h4>
-        <ul *ngFor="let user of users|async; let i = index" [attr.data-index]="i" >
-          <img class="profileImage" [src]="user.photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'"  routerLink="/user/{{user.username}}"/>
+      <div class="usersDiv" id="wrapper">
+        <h4 class="usersTitle"><a routerLink="/users">Users</a></h4>
+        <ul class="users" *ngFor="let user of users|async; let i = index" [attr.data-index]="i">
+          <img class="profileImage" [src]="user.photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'" routerLink="/user/{{user.username}}" />
 
-          <li  ><a routerLink="/user/{{user.username}}">{{user.username}}</a></li>
+          <li class="userLi"><a routerLink="/user/{{user.username}}">{{user.username}}</a></li>
         </ul>
       </div>
       <div class="msgs">
-        <table class="table table-hover">
-          <tr>
-            <th>Msgs</th>
-            <th></th>
-          </tr>
-          <tr *ngFor="let msg of msgs|async; let i = index" [attr.data-index]="i">
 
-            <td>
-              <div class="message-sender contain"><a routerLink="/user/{{msg.username}}"><strong>{{msg.username}}</strong> at {{msg.date | date:'medium'}}</a></div>
+        <h3 class="th">Messages</h3>
 
-              <div class="message-box message-partner ">
-                <div class="msg" *ngIf="msg.msgText">
-                  <div class="">
-                    {{msg.msg}}
-                  </div>
+        <ul *ngFor="let msg of msgs|async; let i = index" [attr.data-index]="i">
+
+          <li>
+            <div class="message-sender contain "><a routerLink="/user/{{msg.username}}"><strong>{{msg.username}}</strong> at {{msg.date | date:'medium'}}</a>
+
+
+            </div>
+
+            <div class="message-box message-partner ">
+              <div class="msg" *ngIf="msg.msgText">
+                <div class="">
+                  {{msg.msg}}
                 </div>
-                <img class="crop" src="{{msg.msg}}" alt="" *ngIf="!msg.msgText">
+              </div>
+              <a href="{{msg.msg}}"><img class="crop" src="{{msg.msg}}" alt="" *ngIf="!msg.msgText"></a>
 
-                <div class="buttons">
-                  <div class="inner">
+              <div class="buttons">
+                <div class="inner">
 
-                    <button [hidden]='msg.show' class="btn btn-success buttonClass" (click)="edit(msg)">
+                  <button [hidden]='msg.show' class="btn btn-success buttonClass" (click)="edit(msg)">
                        <i class="fa fa-edit"></i>
                           </button>
 
-                    <button [hidden]='msg.show' class="btn btn-danger buttonClass" (click)="deleteMsg(msg.id)">
+                  <button [hidden]='msg.show' class="btn btn-danger buttonClass" (click)="deleteMsg(msg.id)">
                         <i class="fas fa-trash"></i>
                           </button>
-                  </div>
                 </div>
-
-              </div>
-
-            </td>
-            <td>
-
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <form #f="ngForm" class="frm">
-      <div class="form-group ">
-        <p class="lead emoji-picker-container">
-          <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control inpt" placeholder="Enter Msg" data-emojiable="true" data-emoji-input="unicode"></p>
-          
-
-        </div>
-          <div class="form-group">
-            <div class="card-body clip">
-              <div class="upload-btn-wrapper">
-                <button class="btn btn1"><i class="fas fa-paperclip"></i></button>
-                <input type="file" (change)="upload($event)" accept=".png,.jpg" name="myfile" required/>
               </div>
 
             </div>
-          </div>
-          <button class="btn btn-primary send" [disabled]="!f.valid" (click)="saveMsg()">
-            Send
-          </button>
 
-        </form>
+          </li>
 
-        <!-- progress bar -->
-        <div class="progress width">
-          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+        </ul>
 
       </div>
+    </div>
+
+    <form #f="ngForm" class="form-group formInput frm">
+
+        <input [(ngModel)]="myMsg" name="myMsg" type="text" class="form-control inpt" placeholder="Enter Msg">
+        <button class="btn btn-primary send" [disabled]="!f.valid" (click)="saveMsg()" >
+            Send
+          </button>
+          <div class="form-group">
+          <div class="card-body clip">
+            <div class="upload-btn-wrapper">
+              <button class="btn btn1"><i class="fas fa-paperclip"></i></button>
+              <input type="file" (change)="upload($event)" accept=".png,.jpg" name="myfile" required/>
+            </div>
+
+          </div>
+        </div>
+
+
+    </form>
+
+    <!-- progress bar -->
+    <div class="progress width">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+  </div>
 </section>
