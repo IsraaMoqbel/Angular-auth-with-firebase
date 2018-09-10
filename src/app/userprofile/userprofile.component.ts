@@ -49,11 +49,12 @@ this.username =this.route.snapshot.paramMap.get('username');
     this.route.paramMap
     .subscribe(data => {
     this.router.navigate(['user', data.get('username')]);
-        console.log(data);
         this.getUsername()
         this.getUser(this.username);
 
     });
+
+
   }
   ngOnChanges(){console.log('change!!!')
     this.getUsername()

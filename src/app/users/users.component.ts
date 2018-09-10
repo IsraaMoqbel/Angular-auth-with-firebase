@@ -26,7 +26,6 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
   this.route.paramMap
   .subscribe(data => {
-  this.router.navigate(['users']);
   this.users = this.appService.getUsers();
   });
 }

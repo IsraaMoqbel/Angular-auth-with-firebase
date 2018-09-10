@@ -54,10 +54,8 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
     // this.msgs = this.db.collection(config.collection_endpoint).valueChanges();
-
     this.route.paramMap
     .subscribe(data => {
-    this.router.navigate(['chat']);
         this.af.auth.onAuthStateChanged(auth => {
           if(auth){
             this.msgs = this.appService.getMsgs(this.id);
