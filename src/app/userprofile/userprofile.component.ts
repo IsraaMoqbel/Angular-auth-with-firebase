@@ -45,6 +45,7 @@ export class UserprofileComponent implements OnInit {
     this.getUser(this.username);
   }
   getUsername(): void {
+    console.log(this.route.snapshot.paramMap);
     const username = this.route.snapshot.paramMap.get('username');
     this.username = username;
 
@@ -79,7 +80,7 @@ export class UserprofileComponent implements OnInit {
           , // some displayName,
           photoURL: auth.photoURL// some photo url
         })
-        this.router.navigate([`/members`]);
+        this.router.navigate([`/chat`]);
       }
     });
   }

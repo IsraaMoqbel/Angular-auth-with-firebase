@@ -22,8 +22,8 @@ export class EmailComponent implements OnInit {
 
       } else {
 
-        console.log('auth in members', auth)
-        // this.router.navigate(['/members']);
+        // console.log('auth in chat', auth)
+        this.router.navigate(['/chat']);
 
       }
     });
@@ -32,7 +32,7 @@ export class EmailComponent implements OnInit {
   onSubmit(formData) {
     if (formData.valid) {
       this.authService.loginWithEmail(formData.value.email, formData.value.password).then((data) => {
-        this.router.navigate(['/members']);
+        this.router.navigate(['/chat']);
       })
         .catch(
           (err) => {

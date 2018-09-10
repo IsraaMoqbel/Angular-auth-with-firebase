@@ -15,11 +15,12 @@ export const router: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: EmailComponent },
   {
-    path: 'members', component: MembersComponent
+    path: 'chat', component: MembersComponent
     , canActivate: [AuthGuard]
   },
   { path: 'user/:username', component: UserprofileComponent },
-    { path: 'users', component: UsersComponent }
+    { path: 'users', component: UsersComponent },
+    {path:'**', redirectTo:'login'}
 ]
 
 @NgModule({

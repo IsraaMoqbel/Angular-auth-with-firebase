@@ -43,7 +43,7 @@ export class MembersComponent implements OnInit {
         this.id = authUser.uid;
         this.user = authUser;
         this.username=authUser.displayName;
-        this.router.navigate(['/members']);
+        this.router.navigate(['/chat']);
       } else {
         this.router.navigate(['/login']);
 
@@ -122,7 +122,6 @@ export class MembersComponent implements OnInit {
             username: this.user.displayName,
             msgText: false
           };
-
             this.appService.addMsg(msg);
 
           //set edit mode to false and clear form

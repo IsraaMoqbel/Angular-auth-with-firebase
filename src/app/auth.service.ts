@@ -13,7 +13,7 @@ export class AuthService {
       if (!auth) {
         console.log('not authorized')
       } else {
-        this.router.navigate(['/members']);
+        this.router.navigate(['/chat']);
 
       }
     });
