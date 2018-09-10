@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, DoCheck } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { AppService } from '../app.service';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -36,7 +36,7 @@ export class MembersComponent implements OnInit {
   uploadState: Observable<string>;
   uploadProgress: Observable<number>;
 
-  constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router, private db: AngularFirestore, private appService: AppService, private afStorage: AngularFireStorage) {
+  constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router, private db: AngularFirestore, private appService: AppService, private afStorage: AngularFireStorage, private route:ActivatedRoute) {
 
     this.af.auth.onAuthStateChanged(authUser => {
       if (authUser) {
@@ -54,14 +54,20 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
     // this.msgs = this.db.collection(config.collection_endpoint).valueChanges();
-    this.af.auth.onAuthStateChanged(auth => {
-      if(auth){
-        this.msgs = this.appService.getMsgs(this.id);
-      }
+
+    this.route.paramMap
+    .subscribe(data => {
+    this.router.navigate(['chat']);
+        this.af.auth.onAuthStateChanged(auth => {
+          if(auth){
+            this.msgs = this.appService.getMsgs(this.id);
+          }
+        });
+
+        this.users = this.appService.getUsers();
+
+
     });
-
-    this.users = this.appService.getUsers();
-
   }
 
   edit(msg) {

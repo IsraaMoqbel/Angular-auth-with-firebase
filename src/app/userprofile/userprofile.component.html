@@ -1,15 +1,21 @@
-<app-navbar [login]=false></app-navbar>
 
-<div>
+  <app-navbar [login]=false></app-navbar>
 
-<img class="profileImage userInfo" [src]="photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'"  routerLink="/user/{{username}}"/>
+
+
+  <div *ngIf="!dateReg" class="loading">
+    Loading!!
+  </div>
+<div *ngIf="dateReg">
+
+<img  class="profileImage userInfo" [src]="photoURL | defaultimg:'assets/images/default.jpg'"  routerLink="/user/{{username}}"/>
 
 <h1  class="color">Welcome {{username}}</h1>
 <h2  class="color2">Registered since </h2>
 <h3  class="color">{{dateReg |date:'medium'}}</h3>
 </div>
 
-<div *ngIf="registeredUser==username">
+<div *ngIf="registeredUser==username && dateReg">
 
 <h4>You can update your data here!</h4>
 <form #f="ngForm" class="form-group formInput frm">

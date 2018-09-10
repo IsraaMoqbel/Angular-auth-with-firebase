@@ -41,7 +41,6 @@ export const firebaseConfig = {
     AppComponent,
     routingComponents,
     DefaultimgPipe,
-    UsersComponent,
     NavbarComponent,
     UsersSearchComponent
   ],

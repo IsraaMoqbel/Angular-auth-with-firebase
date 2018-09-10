@@ -14,7 +14,7 @@
   width: 100%;
 }
 .userInfo{
-  margin-top: 90px;
+  margin-top: 130px;
 }
 
 .color{
@@ -59,4 +59,7 @@
 .inpt {
   margin: auto;
   width: 30%;
+}
+.loading {
+  padding-top: 300px;
 }

@@ -9,7 +9,7 @@
       <div class="usersDiv" id="wrapper">
         <h4 class="usersTitle"><a routerLink="/users">Users</a></h4>
         <ul class="users" *ngFor="let user of users|async; let i = index" [attr.data-index]="i">
-          <img class="profileImage" [src]="user.photoURL | defaultimg:'http://s3.amazonaws.com/uifaces/faces/twitter/sillyleo/128.jpg'" routerLink="/user/{{user.username}}" />
+          <img class="profileImage" [src]="user.photoURL | defaultimg:'assets/images/default.jpg'" routerLink="/user/{{user.username}}" />
 
           <li class="userLi"><a routerLink="/user/{{user.username}}">{{user.username}}</a></li>
         </ul>

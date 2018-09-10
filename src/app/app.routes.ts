@@ -11,15 +11,15 @@ import { UsersComponent } from './users/users.component';
 import { NgModule } from '@angular/core';
 
 export const router: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: EmailComponent },
   {
     path: 'chat', component: MembersComponent
-    , canActivate: [AuthGuard]
+    // , canActivate: [AuthGuard]
   },
   { path: 'user/:username', component: UserprofileComponent },
     { path: 'users', component: UsersComponent },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     {path:'**', redirectTo:'login'}
 ]
 
@@ -34,4 +34,4 @@ export const router: Routes = [
 
 export class RoutesModule { }
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
-export const routingComponents = [SignupComponent, EmailComponent, MembersComponent,UserprofileComponent]
+export const routingComponents = [SignupComponent, EmailComponent, MembersComponent,UserprofileComponent,UsersComponent]

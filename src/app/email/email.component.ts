@@ -39,6 +39,8 @@ export class EmailComponent implements OnInit {
             console.log(err);
             this.error = err;
           })
+    } else {
+      alert('Not valid data!')
     }
   }
   ngOnInit() {

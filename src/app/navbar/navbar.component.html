@@ -2,7 +2,7 @@
 
   <ul class="cp-navbar-container" style="height: 70px;">
     <li id="newLiElementInNavbar-1" class="cp-list"><a class="active" href="/chat">Home</a></li>
-    <li id="newLiElementInNavbar-2" class="cp-list"><a routerLink="/user/{{username}}"> {{ username }}</a></li>
+    <li id="newLiElementInNavbar-2" class="cp-list"><a routerLink="/user/{{username1}}"> {{ username1 }}</a></li>
     <li id="newLiElementInNavbar-3" class="cp-list"><a routerLink="/users">Users</a></li>
     <li id="newLiElementInNavbar-4"  *ngIf='!login'><a class="darkblue" (click)="logout()">Logout</a></li>
     <li id="newLiElementInNavbar-4" *ngIf='login'><a class="darkblue" routerLink="/login">Login</a></li>

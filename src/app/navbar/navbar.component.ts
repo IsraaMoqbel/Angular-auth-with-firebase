@@ -11,11 +11,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class NavbarComponent implements OnInit {
 @Input('login') login;
-username:string;
+username1:string;
   constructor(private appService: AppService, public authService: AuthService,private router: Router,public af: AngularFireAuth) {
     this.af.auth.onAuthStateChanged(authUser => {
       if (authUser) {
-        this.username=authUser.displayName;
+        this.username1=authUser.displayName;
       }
     });
    }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AppService } from '../app.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import 'rxjs/add/operator/map';
 @Component({
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 })
 export class UsersComponent implements OnInit {
   users: any;
-  constructor(private appService: AppService,public af: AngularFireAuth,private router: Router) {
+  constructor(private appService: AppService,public af: AngularFireAuth,private router: Router, private route:ActivatedRoute) {
     this.af.auth.onAuthStateChanged(authUser => {
       if (authUser) {
         this.router.navigate(['/users']);
@@ -24,7 +24,11 @@ export class UsersComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.users = this.appService.getUsers();
-  }
+  this.route.paramMap
+  .subscribe(data => {
+  this.router.navigate(['users']);
+  this.users = this.appService.getUsers();
+  });
+}
 
 }

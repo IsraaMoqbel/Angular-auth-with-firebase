@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from './../app.service';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
@@ -13,7 +13,7 @@ import { finalize } from 'rxjs/operators';
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.css']
 })
-export class UserprofileComponent implements OnInit {
+export class UserprofileComponent implements OnInit, OnChanges {
   username:string;
   photoURL:string;
   dateReg:any;
@@ -34,13 +34,28 @@ export class UserprofileComponent implements OnInit {
         this.registeredUser = authUser.displayName
         // this.router.navigate(['']);
       } else {
-        this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
 
       }
     });
+
+this.username =this.route.snapshot.paramMap.get('username');
   }
 
   ngOnInit() {
+    // this.getUsername()
+    // this.getUser(this.username);
+
+    this.route.paramMap
+    .subscribe(data => {
+    this.router.navigate(['user', data.get('username')]);
+        console.log(data);
+        this.getUsername()
+        this.getUser(this.username);
+
+    });
+  }
+  ngOnChanges(){console.log('change!!!')
     this.getUsername()
     this.getUser(this.username);
   }
