@@ -83,3 +83,6 @@ input[type=file]:before {
 input[type=file]::-webkit-file-upload-button {
   visibility: hidden;
 }
+.signup {
+  padding-top: 50px;
+}

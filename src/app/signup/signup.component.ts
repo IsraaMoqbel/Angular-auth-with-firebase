@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
+
+import { AuthService } from './../auth.service';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -23,24 +26,25 @@ export class SignupComponent implements OnInit {
   email:string;
   password:string;
   displayName:string;
-  constructor(public af: AngularFireAuth, private router: Router,private appService: AppService, private afStorage: AngularFireStorage) {}
+  constructor(public af: AngularFireAuth, private router: Router,private appService: AppService, private afStorage: AngularFireStorage, public authService: AuthService) {}
 
   onSubmit(formData) {
     if (formData.valid) {
-      this.af.auth.createUserWithEmailAndPassword(
-        formData.value.email,
-        formData.value.password
-      )
-      .then(
-        (success) => {
-            this.appService.addUser({uid:success.user.uid,email:formData.value.email,displayName: formData.value.displayName,username: formData.value.displayName,photoURL: this.downloadSrc || null,date:Date.now()})
-
-          this.router.navigate(['/login'])
-        }).catch(
-          (err) => {
-            console.log(err);
-            this.error = err;
-          })
+      // this.af.auth.createUserWithEmailAndPassword(
+      //   formData.value.email,
+      //   formData.value.password
+      // )
+      // .then(
+      //   (success) => {
+      //       this.appService.addUser({uid:success.user.uid,email:formData.value.email,displayName: formData.value.displayName,username: formData.value.displayName,photoURL: this.downloadSrc || null,date:Date.now()})
+      //
+      //     this.router.navigate(['/login'])
+      //   }).catch(
+      //     (err) => {
+      //       console.log(err);
+      //       this.error = err;
+      //     })
+      this.authService.signUpWithAuth(formData.value.email,formData.value.displayName, formData.value.displayName,this.downloadSrc,formData.value.password)
     }
     //adding name and photoUrl to firebase
     this.af.auth.onAuthStateChanged(auth => {

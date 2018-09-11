@@ -31,14 +31,15 @@ export class EmailComponent implements OnInit {
 
   onSubmit(formData) {
     if (formData.valid) {
-      this.authService.loginWithEmail(formData.value.email, formData.value.password).then((data) => {
-        this.router.navigate(['/chat']);
-      })
-        .catch(
-          (err) => {
-            console.log(err);
-            this.error = err;
-          })
+      // this.authService.loginWithEmail(formData.value.email, formData.value.password).then((data) => {
+      //   this.router.navigate(['/chat']);
+      // })
+      //   .catch(
+      //     (err) => {
+      //       console.log(err);
+      //       this.error = err;
+      //     })
+      this.authService.loginWithAuth(formData.value.email, formData.value.password);
     } else {
       alert('Not valid data!')
     }

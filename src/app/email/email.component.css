@@ -32,3 +32,6 @@ button[disabled]{
   flex-flow: column;
   margin: 20px;
 }
+.login {
+  padding-top: 100px;
+}

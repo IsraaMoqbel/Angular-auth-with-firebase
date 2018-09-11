@@ -40,10 +40,11 @@ export class MembersComponent implements OnInit {
 
     this.af.auth.onAuthStateChanged(authUser => {
       if (authUser) {
+        this.router.navigate(['/chat']);
+
         this.id = authUser.uid;
         this.user = authUser;
         this.username=authUser.displayName;
-        this.router.navigate(['/chat']);
       } else {
         this.router.navigate(['/login']);
 
@@ -56,6 +57,7 @@ export class MembersComponent implements OnInit {
     // this.msgs = this.db.collection(config.collection_endpoint).valueChanges();
     this.route.paramMap
     .subscribe(data => {
+      this.router.navigate(['/chat']);
         this.af.auth.onAuthStateChanged(auth => {
           if(auth){
             this.msgs = this.appService.getMsgs(this.id);

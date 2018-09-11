@@ -31,26 +31,24 @@ export class UserprofileComponent implements OnInit, OnChanges {
     this.af.auth.onAuthStateChanged(authUser => {
       if (authUser) {
         // this.id = authUser.uid;
+        this.router.navigate(['user',this.route.snapshot.paramMap.get('username')]);
         this.registeredUser = authUser.displayName
-        // this.router.navigate(['']);
       } else {
       this.router.navigate(['/login']);
 
       }
     });
-
 this.username =this.route.snapshot.paramMap.get('username');
   }
 
   ngOnInit() {
-    // this.getUsername()
-    // this.getUser(this.username);
+
 
     this.route.paramMap
     .subscribe(data => {
-    this.router.navigate(['user', data.get('username')]);
-        this.getUsername()
-        this.getUser(this.username);
+      this.router.navigate(['user',data.get('username')]);
+      this.getUsername()
+      this.getUser(this.username);
 
     });
 
@@ -61,7 +59,6 @@ this.username =this.route.snapshot.paramMap.get('username');
     this.getUser(this.username);
   }
   getUsername(): void {
-    console.log(this.route.snapshot.paramMap);
     const username = this.route.snapshot.paramMap.get('username');
     this.username = username;
 

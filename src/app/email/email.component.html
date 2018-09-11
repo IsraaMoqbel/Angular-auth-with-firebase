@@ -1,6 +1,12 @@
+<app-navbar [login]=true></app-navbar>
+
+
+<div class="login">
+
+
 <form class="cp-login-form" id="cp-login-form" #formData='ngForm' (ngSubmit)="onSubmit(formData)">
   <h2 class="cp-login-form-title" id="cp-login-form-title">Login</h2>
-  <span class="error" *ngIf="error">{{ error }}</span>
+  <span class="error" *ngIf=" authService.error">{{ authService.error }}</span>
   <div class="cp-login-inputs-div" id="cp-login-inputs-div">
     <div class="">
       <label class="cp-label" for="cp-input-0" id="cp-lable-0">Email</label>
@@ -14,3 +20,4 @@
   <a routerLink="/signup" id="cp-link-0" class="cp-link">Don't have an account?</a>
   <button class="cp-button" type="submit" id="cp-login-submit" [disabled]="!formData.valid">Login</button>
 </form>
+</div>
